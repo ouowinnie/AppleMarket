@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerArray">
+        <item>사과동</item>
+        <item>당근동</item>
+        <item>체리동</item>
+    </string-array>
+</resources>

@@ -46,5 +46,8 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
         val listPrice = binding.listPrice
         val chatCount = binding.chatCount
         val likeCount = binding.likeCount
+        init {
+            listImage.clipToOutline = true
+        }
     }
 }
