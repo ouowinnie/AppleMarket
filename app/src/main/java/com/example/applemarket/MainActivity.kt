@@ -1,5 +1,6 @@
 package com.example.applemarket
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -54,4 +55,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    // 뒤로가기 버튼 클릭 시 종료 다이얼로그
+    override fun onBackPressed() {
+        showExitConfirmationDialog()
+    }
+    private fun showExitConfirmationDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("종료")
+            .setMessage("정말로 종료하시겠습니까?")
+            .setPositiveButton("확인") { dialog, which ->
+                finish()
+            }
+            .setNegativeButton("취소", null)
+            .create()
+            alertDialog.show()
+    }
+
 }
