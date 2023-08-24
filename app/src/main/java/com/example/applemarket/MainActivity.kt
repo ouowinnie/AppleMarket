@@ -8,14 +8,19 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.animation.AlphaAnimation
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.applemarket.databinding.ActivityMainBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,13 +55,40 @@ class MainActivity : AppCompatActivity() {
         val adAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, adList)
         binding.spinner.adapter = adAdapter
 
+        // 클릭한 데이터 상세페이지로 넘기기
         adapter.itemClick = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
                 val clickedItem = dataList[position]
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                intent.putExtra("myItem", clickedItem) // 클릭한 아이템을 상세 페이지로 전달
+                intent.putExtra("myItem", clickedItem)
                 startActivity(intent)
             }
+        }
+
+        // floating button
+        val fadeIn = AlphaAnimation(0f, 1f).apply { duration = 700 }
+        val fadeOut = AlphaAnimation(1f, 0f).apply { duration = 700 }
+        var isTop = true
+
+        binding.recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!binding.recyclerView.canScrollVertically(-1)
+                    && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    binding.floatingButton.startAnimation(fadeOut)
+                    binding.floatingButton.visibility = View.INVISIBLE
+                    isTop = true
+                } else {
+                    if(isTop) {
+                        binding.floatingButton.visibility = View.VISIBLE
+                        binding.floatingButton.startAnimation(fadeIn)
+                        isTop = false
+                    }
+                }
+            }
+        })
+        binding.floatingButton.setOnClickListener {
+            binding.recyclerView.smoothScrollToPosition(0)
         }
 
         createNotificationChannel()
