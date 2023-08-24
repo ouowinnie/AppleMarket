@@ -1,6 +1,8 @@
 package com.example.applemarket
 
+import android.icu.text.Transliterator.Position
 import android.view.LayoutInflater
+import android.view.OnReceiveContentListener
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +41,9 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
         return mItems.size
     }
 
+    fun setItemClickListener(listener: ItemClick) {
+        itemClick = listener
+    }
     inner class Holder(val binding: ItemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         val listImage = binding.listImage
         val listTitle = binding.listTitle
@@ -48,6 +53,13 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
         val likeCount = binding.likeCount
         init {
             listImage.clipToOutline = true
+
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    itemClick?.onClick(it, position)
+                }
+            }
         }
     }
 }

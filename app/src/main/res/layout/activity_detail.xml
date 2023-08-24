@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailActivity">
+
+    <ImageView
+        android:id="@+id/detailImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_image_size"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sample8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/profileBg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_corner_frofile"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:layout_marginLeft="@dimen/layout_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailImage" />
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:src="@drawable/user"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/profileBg"
+        app:layout_constraintEnd_toEndOf="@+id/profileBg"
+        app:layout_constraintStart_toStartOf="@+id/profileBg"
+        app:layout_constraintTop_toTopOf="@+id/profileBg" />
+
+    <TextView
+        android:id="@+id/nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="nickname"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/layout_margin"
+        app:layout_constraintStart_toEndOf="@+id/profileBg"
+        app:layout_constraintTop_toBottomOf="@+id/detailImage" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="address"
+        android:layout_marginLeft="@dimen/layout_margin"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileBg"
+        app:layout_constraintStart_toEndOf="@+id/profileBg" />
+
+    <TextView
+        android:id="@+id/mannerNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="39.3 ℃"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="@dimen/list_item_margin"
+        app:layout_constraintEnd_toStartOf="@+id/mannerEmoji"
+        app:layout_constraintTop_toBottomOf="@+id/detailImage" />
+
+    <TextView
+        android:id="@+id/mannerEmoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="😉"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="@dimen/layout_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailImage" />
+
+    <TextView
+        android:id="@+id/mannerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="매너온도"
+        android:layout_marginRight="@dimen/layout_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mannerEmoji" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:background="@drawable/list_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileBg" />
+
+    <TextView
+        android:id="@+id/detailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="detailTitle"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:layout_marginLeft="@dimen/layout_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/detailContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="detailContent"
+        android:textSize="18sp"
+        android:layout_margin="@dimen/layout_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailTitle" />
+
+    <TextView
+        android:id="@+id/likeIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="@dimen/layout_margin"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/love"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="2dp"
+        android:layout_height="40dp"
+        android:background="@drawable/list_border"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/likeIcon" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="000,000원"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:text="채팅하기"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/layout_margin"
+        android:layout_marginRight="@dimen/layout_margin"
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

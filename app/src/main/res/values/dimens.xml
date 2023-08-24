@@ -9,6 +9,7 @@
     <dimen name="list_item_margin">5dp</dimen>
     <dimen name="list_item_padding">4dp</dimen>
     <dimen name="image_size">120dp</dimen>
+    <dimen name="detail_image_size">300dp</dimen>
     <dimen name="image_margin_right">15dp</dimen>
     <dimen name="icon_margin">3dp</dimen>
     <dimen name="image_padding">15dp</dimen>
