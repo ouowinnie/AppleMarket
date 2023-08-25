@@ -13,8 +13,11 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
     interface ItemClick {
         fun onClick(view : View, position : Int)
     }
-
+    interface LongItemClick {
+        fun onLongClick(view : View, position : Int)
+    }
     var itemClick : ItemClick? = null
+    var longItemClick : LongItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,7 +25,7 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.itemView.setOnClickListener {  //클릭이벤트추가부분
+        holder.itemView.setOnClickListener {
             itemClick?.onClick(it, position)
         }
         holder.listImage.setImageResource(mItems[position].listImage)
@@ -41,9 +44,6 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
         return mItems.size
     }
 
-    fun setItemClickListener(listener: ItemClick) {
-        itemClick = listener
-    }
     inner class Holder(val binding: ItemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         val listImage = binding.listImage
         val listTitle = binding.listTitle
@@ -60,6 +60,22 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
                     itemClick?.onClick(it, position)
                 }
             }
+            binding.root.setOnLongClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    longItemClick?.onLongClick(it, position)
+                    true
+                } else {
+                    false
+                }
+            }
+        }
+    }
+    // 아이템 삭제
+    fun removeItem(position: Int) {
+        if (position in 0 until mItems.size) {
+            mItems.removeAt(position)
+            notifyItemRemoved(position)
         }
     }
 }

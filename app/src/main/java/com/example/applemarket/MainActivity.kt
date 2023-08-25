@@ -64,6 +64,22 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+        // 롱클릭 삭제 다이얼로그
+        adapter.longItemClick = object : MyAdapter.LongItemClick {
+            override fun onLongClick(view: View, position: Int) {
+                val alertDialog = AlertDialog.Builder(this@MainActivity)
+                    .setIcon(R.drawable.chat)
+                    .setTitle("삭제")
+                    .setMessage("정말로 삭제하시겠습니까?")
+                    .setPositiveButton("확인") { dialog, which ->
+                        adapter.removeItem(position)
+                    }
+                    .setNegativeButton("취소", null)
+                    .create()
+                alertDialog.show()
+            }
+        }
+
 
         // floating button
         val fadeIn = AlphaAnimation(0f, 1f).apply { duration = 700 }
@@ -100,9 +116,6 @@ class MainActivity : AppCompatActivity() {
 
     // 뒤로가기 버튼 클릭 시 종료 다이얼로그
     override fun onBackPressed() {
-        showExitConfirmationDialog()
-    }
-    private fun showExitConfirmationDialog() {
         val alertDialog = AlertDialog.Builder(this)
             .setIcon(R.drawable.chat)
             .setTitle("종료")
@@ -112,8 +125,9 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton("취소", null)
             .create()
-            alertDialog.show()
+        alertDialog.show()
     }
+
     // Notification
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // Android 8.0
