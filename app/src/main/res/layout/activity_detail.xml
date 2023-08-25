@@ -139,6 +139,19 @@
                 android:paddingBottom="@dimen/layout_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailTitle" />
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="뒤로가기"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/previous" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -191,8 +204,9 @@
             android:layout_marginBottom="@dimen/layout_margin"
             android:background="@drawable/button"
             android:text="채팅하기"
+            android:contentDescription="채팅하기"
             android:textColor="@color/white"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:stateListAnimator="@null"
             app:layout_constraintBottom_toBottomOf="parent"
