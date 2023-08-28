@@ -11,7 +11,7 @@ data class MyItem(
     val listAddress: String,
     val listPrice: String,
     val chatCount: Int,
-    val likeCount: Int,
+    var likeCount: Int,
     val nickname: String,
     val detailContent: String
 ) : Parcelable

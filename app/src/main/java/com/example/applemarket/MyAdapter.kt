@@ -1,8 +1,10 @@
 package com.example.applemarket
 
-import android.icu.text.Transliterator.Position
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.view.LayoutInflater
-import android.view.OnReceiveContentListener
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -77,5 +79,32 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
             mItems.removeAt(position)
             notifyItemRemoved(position)
         }
+    }
+}
+
+class AddressAdapterDecoration : RecyclerView.ItemDecoration() {
+    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        super.onDraw(c, parent, state)
+
+        val paint = Paint()
+        paint.color = Color.GRAY
+
+        for (i in 0 until parent.childCount) {
+            val child = parent.getChildAt(i)
+            val layoutParams = child.layoutParams as RecyclerView.LayoutParams
+            val top = (child.bottom + layoutParams.bottomMargin + 10).toFloat()
+            val bottom = top + 1f
+
+            val left = parent.paddingStart.toFloat()
+            val right = (parent.width - parent.paddingEnd).toFloat()
+
+            c.drawRect(left, top, right, bottom, paint)
+        }
+    }
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        super.getItemOffsets(outRect, view, parent, state)
+        val offset = 10
+        outRect.top = offset
+        outRect.bottom = offset
     }
 }

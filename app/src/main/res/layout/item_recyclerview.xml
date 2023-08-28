@@ -9,7 +9,6 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
         android:orientation="horizontal"
         android:padding="@dimen/image_padding">
 
@@ -79,7 +78,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginRight="@dimen/icon_margin"
-                    android:background="@drawable/love" />
+                    android:background="@drawable/love_empty" />
 
                 <TextView
                     android:id="@+id/likeCount"
@@ -90,13 +89,4 @@
         </LinearLayout>
     </LinearLayout>
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#cccccc"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
