@@ -1,6 +1,6 @@
 # 😏AppleMarket
 #### 중고거래 앱 당근마켓을 클론코딩한 사과마켓 앱 입니다.
-#### [사과마켓 blog] 🔗 <https://velog.io/@ouowinnie/appleMarketAppLast>
+#### [사과마켓 blog] 🔗 <https://velog.io/@ouowinnie/appleMarketAppFirst>
 
 <div><h3>✔ UI, Spinner</h3></div>
 
