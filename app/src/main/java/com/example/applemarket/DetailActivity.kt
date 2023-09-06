@@ -33,16 +33,9 @@ class DetailActivity : AppCompatActivity() {
             binding.detailContent.text = it.detailContent
             binding.price.text = it.listPrice
         }
-        // 상세페이지 상단버튼 뒤로가기
-        val backButton = findViewById<ImageButton>(R.id.backButton)
-        backButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
 
-        // 좋아요 b
-        likeIcon = findViewById(R.id.likeIcon)
+        // 좋아요와 뒤로가기 버튼
+        likeIcon = binding.likeIcon
         likeIcon.setOnClickListener {
             isLiked = !isLiked
             if (isLiked) {
@@ -50,9 +43,13 @@ class DetailActivity : AppCompatActivity() {
             } else {
                 likeIcon.setImageResource(R.drawable.love_empty)
             }
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.putExtra("isLiked", isLiked)
-//            startActivity(intent)
+            val resultIntent = Intent()
+            resultIntent.putExtra("isLiked", isLiked)
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
+        binding.backButton.setOnClickListener {
+            finish()
         }
     }
 }

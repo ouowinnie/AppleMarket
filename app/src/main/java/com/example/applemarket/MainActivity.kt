@@ -69,22 +69,26 @@ class MainActivity : AppCompatActivity() {
                 val clickedItem = dataList[position]
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
                 intent.putExtra("myItem", clickedItem)
-                startActivity(intent)
+                startActivityForResult(intent, DETAIL_REQUEST_CODE)
             }
         }
         // 롱클릭 삭제 다이얼로그
         adapter.longItemClick = object : MyAdapter.LongItemClick {
             override fun onLongClick(view: View, position: Int) {
-                val alertDialog = AlertDialog.Builder(this@MainActivity)
+                val itemRomove = dataList[position]
+                AlertDialog.Builder(this@MainActivity)
                     .setIcon(R.drawable.chat)
                     .setTitle("삭제")
                     .setMessage("정말로 삭제하시겠습니까?")
-                    .setPositiveButton("확인") { dialog, which ->
-                        adapter.removeItem(position)
+                    .setPositiveButton("확인") { dialog, _ ->
+                        dataList.remove(itemRomove)
+                        adapter.notifyDataSetChanged()
+                        dialog.dismiss()
                     }
-                    .setNegativeButton("취소", null)
-                    .create()
-                alertDialog.show()
+                    .setNegativeButton("취소") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                .show()
             }
         }
 
@@ -119,15 +123,22 @@ class MainActivity : AppCompatActivity() {
         notiButton.setOnClickListener {
             showNotification()
         }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-//        val isLiked = intent.getBooleanExtra("isLiked", false)
-//        val likeIcon = findViewById<ImageView>(R.id.likeIcon)
-//        if (isLiked) {
-//            likeIcon.setImageResource(R.drawable.love_filled)
-//        } else {
-//            likeIcon.setImageResource(R.drawable.love_empty)
-//        }
-
+        if (requestCode == DETAIL_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val isLiked = data?.getBooleanExtra("isLiked", false) ?: false
+            updateLikeIcon(isLiked)
+        }
+    }
+    private fun updateLikeIcon(isLiked: Boolean) {
+        val likeIcon = findViewById<ImageView>(R.id.likeIcon)
+        if (isLiked) {
+            likeIcon.setImageResource(R.drawable.love_filled)
+        } else {
+            likeIcon.setImageResource(R.drawable.love_empty)
+        }
     }
 
     // 뒤로가기 버튼 클릭 시 종료 다이얼로그
