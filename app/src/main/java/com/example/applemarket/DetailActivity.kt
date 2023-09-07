@@ -1,22 +1,16 @@
 package com.example.applemarket
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import com.example.applemarket.databinding.ActivityDetailBinding
-import com.example.applemarket.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
-    private lateinit var likeIcon: ImageView
     private var isLiked = false
-    private var likeCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,24 +26,33 @@ class DetailActivity : AppCompatActivity() {
             binding.detailTitle.text = it.listTitle
             binding.detailContent.text = it.detailContent
             binding.price.text = it.listPrice
-        }
-
-        // 좋아요와 뒤로가기 버튼
-        likeIcon = binding.likeIcon
-        likeIcon.setOnClickListener {
-            isLiked = !isLiked
-            if (isLiked) {
-                likeIcon.setImageResource(R.drawable.love_filled)
-            } else {
-                likeIcon.setImageResource(R.drawable.love_empty)
+            isLiked = it.isLiked == true
+            binding.detailLikeIcon.setImageResource(if (isLiked) {R.drawable.love_filled} else {R.drawable.love_empty})
+            binding.backButton.setOnClickListener {
+                exit()
             }
-            val resultIntent = Intent()
-            resultIntent.putExtra("isLiked", isLiked)
-            setResult(Activity.RESULT_OK, resultIntent)
-            finish()
+            binding.detailLikeIcon.setOnClickListener {
+                if(!isLiked){
+                    binding.detailLikeIcon.setImageResource(R.drawable.love_filled)
+                    Snackbar.make(binding.constLayout, "관심 목록에 추가되었습니다.", Snackbar.LENGTH_SHORT).show()
+                    isLiked = true
+                }else {
+                    binding.detailLikeIcon.setImageResource(R.drawable.love_empty)
+                    isLiked = false
+                }
+            }
         }
-        binding.backButton.setOnClickListener {
-            finish()
+    }
+    private fun exit() {
+        val likePosition = intent.getIntExtra("likePosition", 0)
+        val intent = Intent(this, MainActivity::class.java).apply {
+            putExtra("likePosition", likePosition)
+            putExtra("isLiked", isLiked)
         }
+        setResult(RESULT_OK, intent)
+        if (!isFinishing) finish()
+    }
+    override fun onBackPressed() {
+        exit()
     }
 }

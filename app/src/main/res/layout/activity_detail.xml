@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/constLayout"
     tools:context=".DetailActivity">
 
     <ScrollView
@@ -164,7 +165,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
-            android:id="@+id/likeIcon"
+            android:id="@+id/detailLikeIcon"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="@dimen/layout_margin"
@@ -181,7 +182,7 @@
             android:layout_marginBottom="@dimen/layout_margin"
             android:background="#cccccc"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/likeIcon"
+            app:layout_constraintStart_toEndOf="@+id/detailLikeIcon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

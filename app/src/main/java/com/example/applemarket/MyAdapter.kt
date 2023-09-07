@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applemarket.databinding.ItemRecyclerviewBinding
 
-class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapter.Holder>() {
+class MyAdapter(private val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapter.Holder>() {
 
     interface ItemClick {
         fun onClick(view : View, position : Int)
@@ -36,6 +36,10 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
         holder.listPrice.text = mItems[position].listPrice
         holder.chatCount.text = mItems[position].chatCount.toString()
         holder.likeCount.text = mItems[position].likeCount.toString()
+        if(mItems[position].isLiked)
+            holder.likeIcon.setImageResource(R.drawable.love_filled)
+        else
+            holder.likeIcon.setImageResource(R.drawable.love_empty)
     }
 
     override fun getItemId(position: Int): Long {
@@ -46,13 +50,14 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
         return mItems.size
     }
 
-    inner class Holder(val binding: ItemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(private val binding: ItemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         val listImage = binding.listImage
         val listTitle = binding.listTitle
         val listAddress = binding.listAddress
         val listPrice = binding.listPrice
         val chatCount = binding.chatCount
         val likeCount = binding.likeCount
+        val likeIcon = binding.likeIcon
         init {
             listImage.clipToOutline = true
 
@@ -71,13 +76,6 @@ class MyAdapter(val mItems: MutableList<MyItem>) : RecyclerView.Adapter<MyAdapte
                     false
                 }
             }
-        }
-    }
-    // 아이템 삭제
-    fun removeItem(position: Int) {
-        if (position in 0 until mItems.size) {
-            mItems.removeAt(position)
-            notifyItemRemoved(position)
         }
     }
 }

@@ -13,5 +13,6 @@ data class MyItem(
     val chatCount: Int,
     var likeCount: Int,
     val nickname: String,
-    val detailContent: String
+    val detailContent: String,
+    var isLiked: Boolean
 ) : Parcelable
